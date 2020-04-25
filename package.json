@@ -1,0 +1,28 @@
+{
+  "name": "current-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpeedyGonzales949/Networked_TicTacToe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SpeedyGonzales949/Networked_TicTacToe/issues"
+  },
+  "homepage": "https://github.com/SpeedyGonzales949/Networked_TicTacToe#readme",
+  "description": ""
+}
