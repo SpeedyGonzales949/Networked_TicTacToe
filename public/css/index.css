@@ -58,7 +58,6 @@ body {
 .homePage .menu ul li button:hover {
   transform: scale(1.1);
   background: #00ff99;
-  box-shadow: 0 0 10px #00ff99, 0 0 40px #00ff99, 0 0 80px #00ff99;
   color: black;
 }
 
@@ -76,4 +75,38 @@ body {
   0.66% {
     transform: translateY(-100%);
   }
+}
+
+.rules {
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  background: rgba(0, 0, 0, 1);
+  width: 80%;
+  height: 80%;
+  border: 2px solid whitesmoke;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+.rules h1 {
+  font-size: min(7vw, 7vh);
+  margin: 20px;
+  text-align: center;
+}
+.rules p {
+  font-size: min(3vw, 3vh);
+  margin: 20px;
+  text-align: justify;
+}
+.rules button {
+  font-size: 40px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
 }

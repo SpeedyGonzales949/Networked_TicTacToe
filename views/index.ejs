@@ -24,13 +24,13 @@
       <div class="menu">
         <ul>
           <li>
-            <button style="filter: drop-shadow(0px 0px 20px rgb(1, 247, 206));">
+            <button style="filter: drop-shadow(0px 0px 10px rgb(1, 247, 206));">
               Multiplayer
             </button>
           </li>
           <li>
             <button
-              style="filter: hue-rotate(40deg) drop-shadow(0px 0px 20px blue);"
+              style="filter: hue-rotate(40deg) drop-shadow(0px 0px 10px blue);"
             >
               SinglePlayer
             </button>
@@ -38,7 +38,7 @@
           <li>
             <button
               style="
-                filter: hue-rotate(252deg) drop-shadow(0px 0px 20px orange);
+                filter: hue-rotate(252deg) drop-shadow(0px 0px 10px orange);
               "
             >
               Scoreboard
@@ -46,7 +46,8 @@
           </li>
           <li>
             <button
-              style="filter: hue-rotate(180deg) drop-shadow(0px 0px 20px red);"
+              style="filter: hue-rotate(180deg) drop-shadow(0px 0px 10px red);"
+              onclick="OpenRulesTab()"
             >
               Rules
             </button>
@@ -54,6 +55,42 @@
         </ul>
       </div>
     </div>
-    <script></script>
+
+    <div class="rules" id="rules">
+      <h1>RULES FOR TIC-TAC-TOE</h1>
+      <ol>
+        <li>
+          <p>The game is played on a grid that's 3 squares by 3 squares.</p>
+        </li>
+        <li>
+          <p>
+            You are X, your friend (or the computer ) is O. Players take turns
+            putting their marks in empty squares.
+          </p>
+        </li>
+        <li>
+          <p>
+            The first player to get 3 of her marks in a row (up, down, across,
+            or diagonally) is the winner.
+          </p>
+        </li>
+        <li>
+          <p>
+            When all 9 squares are full, the game is over. If no player has 3
+            marks in a row, the game ends in a tie.
+          </p>
+        </li>
+      </ol>
+      <button onclick="CloseRuleTabe()">&times;</button>
+    </div>
+    <script>
+      const rules = document.getElementById("rules");
+      function OpenRulesTab() {
+        rules.style = "display:flex;";
+      }
+      function CloseRuleTabe() {
+        rules.style = "display:none;";
+      }
+    </script>
   </body>
 </html>
