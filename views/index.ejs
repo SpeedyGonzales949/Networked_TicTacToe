@@ -4,7 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/index.css" />
-    <script src="js/script.js"></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"
+    ></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"
+    ></script>
+    <script defer src="js/script.js"></script>
+    <script defer src="js/minimax.js"></script>
+    <script defer src="js/sketch.js"></script>
+    <script defer src="/socket.io/socket.io.js"></script>
+    <script defer src="js/client.js"></script>
+
     <title>Document</title>
   </head>
   <body>
@@ -24,13 +37,19 @@
       <div class="menu">
         <ul>
           <li>
-            <button style="filter: drop-shadow(0px 0px 10px rgb(1, 247, 206));">
+            <button
+              style="filter: drop-shadow(0px 0px 10px rgb(1, 247, 206));"
+              id="OpenMulti"
+              onclick="OpenMultiTab()"
+            >
               Multiplayer
             </button>
           </li>
           <li>
             <button
               style="filter: hue-rotate(40deg) drop-shadow(0px 0px 10px blue);"
+              onclick="OpenSingleTab()"
+              id="OpenSingle"
             >
               SinglePlayer
             </button>
@@ -83,14 +102,16 @@
       </ol>
       <button onclick="CloseRuleTabe()">&times;</button>
     </div>
-    <script>
-      const rules = document.getElementById("rules");
-      function OpenRulesTab() {
-        rules.style = "display:flex;";
-      }
-      function CloseRuleTabe() {
-        rules.style = "display:none;";
-      }
-    </script>
+    <div class="single-player-board" id="SingleTab">
+      <div class="canvs" id="container"></div>
+      <button id="reset-button">Reset</button>
+      <button id="CloseSingle" onclick="CloseSingleTab()">&times;</button>
+      <div class="logs" id="logs"></div>
+    </div>
+    <div class="multi-layer-board" id="MultiTab">
+      <div class="canvasMulti" id="containerMulti"></div>
+      <button onclick="CloseMultiTab()">&times;</button>
+      <div class="Multilogs" id="Multilogs"></div>
+    </div>
   </body>
 </html>

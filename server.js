@@ -13,3 +13,12 @@ app.get("/", (req, res) => {
 });
 var port = process.env.PORT || 3000;
 server.listen(port);
+
+io.on("connection", (socket) => {
+  console.log(socket.id);
+  socket.join("hey00");
+  io.in("hey00").emit("hey", "hello");
+  socket.on("disconnect", () => {
+    console.log("disconneted");
+  });
+});
