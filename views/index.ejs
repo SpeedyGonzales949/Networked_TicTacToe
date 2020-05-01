@@ -109,9 +109,24 @@
       <div class="logs" id="logs"></div>
     </div>
     <div class="multi-layer-board" id="MultiTab">
-      <div class="canvasMulti" id="containerMulti"></div>
-      <button onclick="CloseMultiTab()">&times;</button>
       <div class="Multilogs" id="Multilogs"></div>
+      <div class="board" id="board">
+        <div class="1 cell" data-cell></div>
+        <div class="2 cell" data-cell></div>
+        <div class="3 cell" data-cell></div>
+        <div class="4 cell" data-cell></div>
+        <div class="5 cell" data-cell></div>
+        <div class="6 cell" data-cell></div>
+        <div class="7 cell" data-cell></div>
+        <div class="8 cell" data-cell></div>
+        <div class="9 cell" data-cell></div>
+      </div>
+      <div class="winning-message" id="winningMessage">
+        <div data-winning-message-text></div>
+        <button id="restartButton">Play Again</button>
+        <button onclick="CloseMultiTab()">&times;</button>
+      </div>
+      <div class="canvasMulti" id="containerMulti"></div>
     </div>
   </body>
 </html>

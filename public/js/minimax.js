@@ -5,10 +5,10 @@ function bestMove() {
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       // Is the spot available?
-      if (board[i][j] == "") {
-        board[i][j] = ai;
-        let score = minimax(board, 0, false);
-        board[i][j] = "";
+      if (Sboard[i][j] == "") {
+        Sboard[i][j] = ai;
+        let score = minimax(Sboard, 0, false);
+        Sboard[i][j] = "";
         if (score > bestScore) {
           bestScore = score;
           move = { i, j };
@@ -16,7 +16,7 @@ function bestMove() {
       }
     }
   }
-  board[move.i][move.j] = ai;
+  Sboard[move.i][move.j] = ai;
   currentPlayer = human;
 }
 
@@ -26,7 +26,7 @@ let scores = {
   tie: 0,
 };
 
-function minimax(board, depth, isMaximizing) {
+function minimax(Sboard, depth, isMaximizing) {
   let result = checkWinner();
   if (result !== null) {
     return scores[result];
@@ -37,10 +37,10 @@ function minimax(board, depth, isMaximizing) {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         // Is the spot available?
-        if (board[i][j] == "") {
-          board[i][j] = ai;
-          let score = minimax(board, depth + 1, false);
-          board[i][j] = "";
+        if (Sboard[i][j] == "") {
+          Sboard[i][j] = ai;
+          let score = minimax(Sboard, depth + 1, false);
+          Sboard[i][j] = "";
           bestScore = max(score, bestScore);
         }
       }
@@ -51,10 +51,10 @@ function minimax(board, depth, isMaximizing) {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         // Is the spot available?
-        if (board[i][j] == "") {
-          board[i][j] = human;
-          let score = minimax(board, depth + 1, true);
-          board[i][j] = "";
+        if (Sboard[i][j] == "") {
+          Sboard[i][j] = human;
+          let score = minimax(Sboard, depth + 1, true);
+          Sboard[i][j] = "";
           bestScore = min(score, bestScore);
         }
       }

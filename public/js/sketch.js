@@ -1,4 +1,4 @@
-let board = [
+let Sboard = [
   ["", "", ""],
   ["", "", ""],
   ["", "", ""],
@@ -44,7 +44,7 @@ function equals3(a, b, c) {
   return a == b && b == c && a != "";
 }
 function reset() {
-  board = [
+  Sboard = [
     ["", "", ""],
     ["", "", ""],
     ["", "", ""],
@@ -61,30 +61,30 @@ function checkWinner() {
 
   // horizontal
   for (let i = 0; i < 3; i++) {
-    if (equals3(board[i][0], board[i][1], board[i][2])) {
-      winner = board[i][0];
+    if (equals3(Sboard[i][0], Sboard[i][1], Sboard[i][2])) {
+      winner = Sboard[i][0];
     }
   }
 
   // Vertical
   for (let i = 0; i < 3; i++) {
-    if (equals3(board[0][i], board[1][i], board[2][i])) {
-      winner = board[0][i];
+    if (equals3(Sboard[0][i], Sboard[1][i], Sboard[2][i])) {
+      winner = Sboard[0][i];
     }
   }
 
   // Diagonal
-  if (equals3(board[0][0], board[1][1], board[2][2])) {
-    winner = board[0][0];
+  if (equals3(Sboard[0][0], Sboard[1][1], Sboard[2][2])) {
+    winner = Sboard[0][0];
   }
-  if (equals3(board[2][0], board[1][1], board[0][2])) {
-    winner = board[2][0];
+  if (equals3(Sboard[2][0], Sboard[1][1], Sboard[0][2])) {
+    winner = Sboard[2][0];
   }
 
   let openSpots = 0;
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
-      if (board[i][j] == "") {
+      if (Sboard[i][j] == "") {
         openSpots++;
       }
     }
@@ -104,8 +104,8 @@ function mousePressed() {
       let i = floor(mouseX / w);
       let j = floor(mouseY / h);
       // If valid turn
-      if (board[i][j] == "") {
-        board[i][j] = human;
+      if (Sboard[i][j] == "") {
+        Sboard[i][j] = human;
         currentPlayer = ai;
         bestMove();
       }
@@ -125,7 +125,7 @@ function draw() {
     for (let i = 0; i < 3; i++) {
       let x = w * i + w / 2;
       let y = h * j + h / 2;
-      let spot = board[i][j];
+      let spot = Sboard[i][j];
       textSize(32);
       let r = w / 4;
       if (spot == human) {
