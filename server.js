@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
+let NumberOfUSers = 0;
 let rooms = [
   ["", "", ""],
   ["", "", ""],
@@ -25,39 +26,39 @@ app.get("/", (req, res) => {
 const port = process.env.PORT || 3000;
 server.listen(port);
 io.on("connection", (socket) => {
+  NumberOfUSers += 1;
+  console.log("Connected Users:" + NumberOfUSers);
   socket.on("disconnect", () => {
-    console.log(socket.id + "-disconnected");
     const CurrentRoomLeft = deleteUser(socket.id);
     socket.to(CurrentRoomLeft).emit("Game-Broke", "Opponent left the game");
   });
   socket.on("GameRequest", (name) => {
     let place = getEmptySpace();
-    console.log(name + "-wants to play");
-    socket.join(rooms[place.i][0]);
-    rooms[place.i][place.j] = socket.id;
-    if (checkRoomIsFull(place.i)) {
-      console.log(rooms);
-      let CurrentGame = {
-        Player1: rooms[place.i][1],
-        Player2: rooms[place.i][2],
-        turn: rooms[place.i][getRandomInt(2)],
-        room: rooms[place.i][0],
-        ClassList: "x",
-        CellNumber: 0,
-      };
+    if (checkIfUserIsAlreadyInRoom(socket.id, place.i)) {
+      socket.join(rooms[place.i][0]);
+      rooms[place.i][place.j] = socket.id;
+      if (checkRoomIsFull(place.i)) {
+        let CurrentGame = {
+          Player1: rooms[place.i][1],
+          Player2: rooms[place.i][2],
+          turn: rooms[place.i][getRandomInt(2)],
+          room: rooms[place.i][0],
+          ClassList: "x",
+          CellNumber: 0,
+        };
 
-      io.to(rooms[place.i][0]).emit("game-starts", CurrentGame);
+        io.to(rooms[place.i][0]).emit("game-starts", CurrentGame);
+      }
     }
   });
   socket.on("TurnDone", (data) => {
-    console.log("turndDone");
     io.to(data.room).emit("Draw-Move", data);
   });
   socket.on("MoveDone", (data) => {
-    console.log("Move done");
     io.to(data.room).emit("New-Move", data);
   });
   socket.on("delete-User-from-Room", (data) => {
+    socket.leave(data.room);
     EndGameUserDelete(data.room);
   });
 });
@@ -98,7 +99,6 @@ function checkRoomIsFull(i) {
 }
 function getRandomInt(max) {
   const number = Math.floor(Math.random() * Math.floor(max) + 1);
-  console.log(number);
   return number;
 }
 function EndGameUserDelete(CurrentRoom) {
@@ -107,4 +107,10 @@ function EndGameUserDelete(CurrentRoom) {
       rooms[i][1] = "";
       rooms[i][2] = "";
     }
+}
+function checkIfUserIsAlreadyInRoom(id, i) {
+  console.log("checked");
+  if (rooms[i][1] == id || rooms[i][2] == id) {
+    return false;
+  } else return true;
 }

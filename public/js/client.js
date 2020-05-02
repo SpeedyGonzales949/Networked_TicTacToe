@@ -32,6 +32,7 @@ socket.on("game-starts", (data) => {
   if (data.turn == "" + socket.id + "") {
     status.innerText = "Your Turn";
     setBoardHoverClass(false);
+    ImpossibleMove(false);
     circleTurn = false;
   } else {
     status.innerText = "Opponent's Turn";
@@ -74,7 +75,13 @@ socket.on("New-Move", (data) => {
 restartButton.addEventListener("click", () => {
   socket.emit("GameRequest", socket.id);
   status.innerText = "Waiting for opponent";
-  startGame();
+  cellElements.forEach((cell) => {
+    cell.classList.remove(X_CLASS);
+    cell.classList.remove(CIRCLE_CLASS);
+    cell.removeEventListener("click", handleClick);
+    cell.style = "pointer-events:none;";
+  });
+  winningMessageElement.classList.remove("show");
 });
 
 function startGame() {
